@@ -1,0 +1,133 @@
+/* General Reset and Body Styling */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+  background: #f4f6f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 16px;
+}
+
+/* Styling for the Card */
+.card {
+  max-width: 420px;
+  width: 100%;
+  background: #fff;
+  border-radius: 16px; /* Rounded corners */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Subtle shadow for a real card feel */
+  padding: 24px;
+  text-align: center;
+  border: 1px solid #e5e7eb; /* Border around the card */
+}
+
+/* Logo Styling */
+.logo {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 16px;
+  
+  overflow: hidden;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Title and Role Styling */
+h1 {
+  margin: 0;
+  font-size: 22px;
+  color: #111;
+}
+
+p.role {
+  margin: 4px 0 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Button Styling */
+.btn {
+  display: inline-block;
+  width: 48%; /* 2 buttons per row */
+  margin: 8px 1%;
+  padding: 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* WhatsApp Button */
+.whatsapp {
+  background: #25D366;
+  color: #fff;
+  text-align: center;
+}
+
+/* Call Button */
+.call {
+  background: #2563eb;
+  color: #fff;
+  text-align: center;
+}
+
+/* Catalog Button */
+.catalog {
+  background: #f3f4f6;
+  color: #333;
+  border: 1px solid #e5e7eb;
+  margin-top: 10px;
+}
+
+/* Save Contact Button */
+.save {
+  background: #0b8a5f;
+  color: #fff;
+  margin-top: 10px;
+}
+
+/* Contact Information Styling */
+.contact-info {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #555;
+  text-align: left;
+}
+
+.contact-info div {
+  margin: 6px 0;
+}
+
+/* Footer Styling */
+footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #888;
+}
+
+/* Buttons Row (WhatsApp and Call) */
+.buttons-row {
+  display: flex;
+  justify-content: space-between; /* Makes the buttons align on the same row */
+  margin-bottom: 16px;
+}
+
+/* Icon Styling in Buttons */
+.icon {
+  margin-right: 8px;
+}

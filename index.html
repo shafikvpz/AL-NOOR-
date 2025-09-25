@@ -1,51 +1,283 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Digital Visiting Card</title>
-  <style>
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:#f4f6f9;display:flex;align-items:center;justify-content:center;height:100vh;padding:16px}
-    .card{max-width:420px;width:100%;background:#fff;border-radius:20px;box-shadow:0 8px 24px rgba(0,0,0,0.08);padding:24px;text-align:center}
-    .logo{width:90px;height:90px;margin:0 auto 16px;border-radius:50%;overflow:hidden;background:#eee;display:flex;align-items:center;justify-content:center}
-    .logo img{width:100%;height:100%;object-fit:cover}
-    h1{margin:0;font-size:22px;color:#111}
-    p.role{margin:4px 0 12px;font-size:14px;color:#666}
-    .btn{display:block;width:100%;margin:10px 0;padding:14px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px}
-    .whatsapp{background:#25D366;color:#fff}
-    .call{background:#2563eb;color:#fff}
-    .catalog{background:#f3f4f6;color:#333;border:1px solid #e5e7eb}
-    .save{background:#0b8a5f;color:#fff}
-    .contact-info{margin-top:14px;font-size:13px;color:#555;text-align:left}
-    .contact-info div{margin:6px 0}
-    footer{margin-top:20px;font-size:12px;color:#888}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border: 4px solid #f0f0f0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            /* Square shape */
+            border-radius: 10px;
+        }
+        
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            color: #6e8efb;
+        }
+        
+        .job-title {
+            font-size: 18px;
+            color: #6e8efb;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        
+        .contact-info {
+            margin: 25px 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .contact-item:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            color: #6e8efb;
+            overflow: hidden;
+        }
+        
+        .icon img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        
+        .contact-details {
+            text-align: left;
+            flex: 1;
+        }
+        
+        .contact-type {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 3px;
+        }
+        
+        .contact-value {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .website {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .website:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nfc-indicator {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nfc-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        /* Instructions for adding your images */
+        .image-instructions {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+            text-align: left;
+        }
+        
+        .image-instructions h3 {
+            margin-bottom: 10px;
+            color: #6e8efb;
+        }
+        
+        .image-instructions ol {
+            margin-left: 20px;
+        }
+        
+        .image-instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .image-instructions code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .whatsapp-link {
+           color: #6e8efb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <div class="logo">
-      <!-- Replace with your logo -->
-      <img src="logo.png" alt="Company Logo">
+    <div class="card">
+        <div class="logo-container">
+            <!-- Square logo -->
+            <img src="Images/Logo.jpeg" alt="Your Logo" class="logo" id="logoImage">
+        </div>
+        <h1>AL NOOR STEEL & ALUMINIUM & Glass</h1>
+        <div class="job-title">Ras AL Khaimah</div>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <div class="icon">
+                    <!-- WhatsApp icon from your image folder -->
+                    <img src="Images/icons8-whatsapp .gif" alt="WhatsApp" id="whatsappIcon">
+                </div>
+                <div class="contact-details">
+                    <div class="contact-type">WhatsApp</div>
+                    <div class="contact-value">
+                        <a href="https://wa.me/971559278786" class="whatsapp-link">+(971) 559278786</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="icon"><img src="Images/icons8-email-100.png" alt="WhatsApp" id="whatsappIcon"></div>
+                <div class="contact-details">
+                    <div class="contact-type">Email</div>
+                    <div class="contact-value">alnooraluminium073@gmail.com</div>
+                </div>
+            </div>
+            
+            <div class="contact-item">
+                <div class="icon"><img src="Images/icons8-call-100.png" alt="WhatsApp" id="whatsappIcon"></div>
+                <div class="contact-details">
+                    <div class="contact-type">Call</div>
+                    <a href="tel:971559278786" class="whatsapp-link">+(971) 559278786</a>
+                </div>
+            </div>
+        </div>
+        
+        <a href="Images/Al NOOR.pdf" class="website">Catalogue</a>
+        
+        <div class="nfc-indicator">
+            <span class="nfc-icon">📲</span> NFC Card Detected
+        </div>
+        
+        <div class="image-instructions">
+            <h3>How to Add Your Images</h3>
+            <ol>
+                <li><strong>For the logo:</strong> Replace the placeholder image URL with your actual logo URL</li>
+                <li><strong>For the WhatsApp icon:</strong> Make sure you have a file named "whatsapp-icon.png" in your image folder</li>
+                <li>If your WhatsApp icon has a different name, update the <code>src</code> attribute in the WhatsApp icon <code>img</code> tag</li>
+                <li>Your logo will now display as a square shape with slightly rounded corners</li>
+            </ol>
+        </div>
     </div>
-    <h1>My Company</h1>
-    <p class="role">Digital Visiting Card</p>
 
-    <!-- Replace numbers/links accordingly -->
-    <a href="https://wa.me/971559278786?text=Hello" class="btn whatsapp">💬 WhatsApp</a>
-    <a href="tel:971559278786" class="btn call">📞 Call</a>
-    <a href="https://drive.google.com/file/d/18FugylgzAMtmoAzEmbeO7HB8oDr7VNMq/view?usp=drive_link" target="_blank" class="btn catalog">📘 View Catalog</a>
-    <a href="contact.vcf" download class="btn save">💾 Save Contact</a>
-
-    <div class="contact-info">
-      <div><strong>WhatsApp:</strong> 971559278786</div>
-      <div><strong>WhatsApp:</strong> 971559278786</div>
-      <div><strong>Phone:</strong> 971509931312</div>
-      <div><strong>Email:</strong> alnooraluminium073@gmail.com</div>
-      
-    </div>
-
-    <footer>Tap NFC card or scan QR code to open this card</footer>
-  </div>
+    <script>
+        // Simple animation when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.querySelector('.card');
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 300);
+            
+            // Function to update logo
+            function updateLogo() {
+                const logoUrl = prompt("Enter the URL of your logo image:");
+                if (logoUrl) {
+                    document.getElementById('logoImage').src = logoUrl;
+                }
+            }
+            
+            // Function to update WhatsApp icon
+            function updateWhatsAppIcon() {
+                const iconUrl = prompt("Enter the URL of your WhatsApp icon image:");
+                if (iconUrl) {
+                    document.getElementById('whatsappIcon').src = iconUrl;
+                }
+            }
+            
+            // Uncomment the lines below if you want to enable image updates on click
+            // document.getElementById('logoImage').addEventListener('click', updateLogo);
+            // document.getElementById('whatsappIcon').addEventListener('click', updateWhatsAppIcon);
+        });
+    </script>
 </body>
 </html>
-
