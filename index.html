@@ -19,18 +19,36 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow: hidden;
         }
         
-        .card {
-            background-color: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        .container {
+            position: relative;
             width: 100%;
             max-width: 400px;
-            padding: 30px;
-            text-align: center;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
         
+        .pages {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .page {
+            width: 33.333%;
+            height: 100%;
+            background-color: white;
+            padding: 30px;
+            text-align: center;
+            overflow-y: auto;
+        }
+        
+        /* Page 1 - Contact Card */
         .logo-container {
             width: 120px;
             height: 120px;
@@ -42,7 +60,6 @@
             overflow: hidden;
             border: 4px solid #f0f0f0;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            /* Square shape */
             border-radius: 10px;
         }
         
@@ -150,127 +167,307 @@
             font-size: 18px;
         }
         
-        /* Instructions for adding your images */
-        .image-instructions {
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-            text-align: left;
-        }
-        
-        .image-instructions h3 {
-            margin-bottom: 10px;
-            color: #6e8efb;
-        }
-        
-        .image-instructions ol {
-            margin-left: 20px;
-        }
-        
-        .image-instructions li {
-            margin-bottom: 8px;
-        }
-        
-        .image-instructions code {
-            background-color: #eee;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: monospace;
-        }
-        
         .whatsapp-link {
            color: #6e8efb;
             text-decoration: none;
             font-weight: 500;
         }
+        
+        /* Page 2 - Services */
+        .services-list {
+            list-style-type: none;
+            margin-top: 20px;
+        }
+        
+        .services-list li {
+            background-color: #f5f5f5;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+        
+        .services-list li:before {
+            content: "✓";
+            color: #6e8efb;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        /* Page 3 - Location */
+        .map-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #888;
+        }
+        
+        .address {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        /* Navigation dots */
+        .navigation {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .dot.active {
+            background-color: #6e8efb;
+        }
+        
+        /* Swipe instructions */
+        .swipe-instructions {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="logo-container">
-            <!-- Square logo -->
-            <img src="Logo.jpeg" alt="Your Logo" class="logo" id="logoImage">
-        </div>
-        <h1>AL NOOR STEEL & ALUMINIUM & Glass</h1>
-        <div class="job-title">Ras AL Khaimah</div>
+    <div class="container">
+        <div class="swipe-instructions">Swipe left or right to navigate</div>
         
-        <div class="contact-info">
-            <div class="contact-item">
-                <div class="icon">
-                    <!-- WhatsApp icon from your image folder -->
-                    <img src="icons8-whatsapp .gif" alt="WhatsApp" id="whatsappIcon">
+        <div class="pages" id="pages">
+            <!-- Page 1 - Contact Card -->
+            <div class="page">
+                <div class="logo-container">
+                    <img src="Logo.jpeg" alt="Your Logo" class="logo" id="logoImage">
                 </div>
-                <div class="contact-details">
-                    <div class="contact-type">WhatsApp</div>
-                    <div class="contact-value">
-                        <a href="https://wa.me/971559278786" class="whatsapp-link">+(971) 559278786</a>
+                <h1>AL NOOR STEEL & ALUMINIUM & Glass</h1>
+                <div class="job-title">Ras AL Khaimah</div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="icon">
+                            <img src="icons8-whatsapp .gif" alt="WhatsApp" id="whatsappIcon">
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-type">WhatsApp</div>
+                            <div class="contact-value">
+                                <a href="https://wa.me/971559278786" class="whatsapp-link">+(971) 559278786</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon"><img src="icons8-email-100.png" alt="Email"></div>
+                        <div class="contact-details">
+                            <div class="contact-type">Email</div>
+                            <div class="contact-value">alnooraluminium073@gmail.com</div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon"><img src="icons8-call-100.png" alt="Phone"></div>
+                        <div class="contact-details">
+                            <div class="contact-type">Call</div>
+                            <a href="tel:971559278786" class="whatsapp-link">+(971) 559278786</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="contact-item">
-                <div class="icon"><img src="icons8-email-100.png" alt="WhatsApp" id="whatsappIcon"></div>
-                <div class="contact-details">
-                    <div class="contact-type">Email</div>
-                    <div class="contact-value">alnooraluminium073@gmail.com</div>
+                
+                <a href="Al NOOR.pdf" class="website">Catalogue</a>
+                
+                <div class="nfc-indicator">
+                    <span class="nfc-icon">📲</span> NFC Card Detected
                 </div>
             </div>
             
-            <div class="contact-item">
-                <div class="icon"><img src="icons8-call-100.png" alt="WhatsApp" id="whatsappIcon"></div>
-                <div class="contact-details">
-                    <div class="contact-type">Call</div>
-                    <a href="tel:971559278786" class="whatsapp-link">+(971) 559278786</a>
+            <!-- Page 2 - Services -->
+            <div class="page">
+                <h1>Our Services</h1>
+                <div class="job-title">Professional Steel & Aluminium Solutions</div>
+                
+                <ul class="services-list">
+                    <li>Custom Steel Fabrication</li>
+                    <li>Aluminium Windows & Doors</li>
+                    <li>Glass Installation Services</li>
+                    <li>Structural Steel Work</li>
+                    <li>Aluminium Cladding</li>
+                    <li>Steel & Aluminium Repairs</li>
+                    <li>Commercial & Residential Projects</li>
+                    <li>Consultation & Design Services</li>
+                </ul>
+                
+                <div class="nfc-indicator">
+                    <span class="nfc-icon">🔧</span> Quality Craftsmanship
+                </div>
+            </div>
+            
+            <!-- Page 3 - Location -->
+            <div class="page">
+                <h1>Our Location</h1>
+                <div class="job-title">Visit Us in Ras AL Khaimah</div>
+                
+                <div class="map-placeholder">
+                    [Map of Ras AL Khaimah]
+                </div>
+                
+                <div class="address">
+                    <h3>Business Address</h3>
+                    <p>AL NOOR STEEL & ALUMINIUM & Glass<br>
+                    Ras AL Khaimah, United Arab Emirates</p>
+                    
+                    <h3>Business Hours</h3>
+                    <p>Sunday - Thursday: 8:00 AM - 6:00 PM<br>
+                    Friday: 8:00 AM - 12:00 PM<br>
+                    Saturday: Closed</p>
+                </div>
+                
+                <div class="nfc-indicator">
+                    <span class="nfc-icon">📍</span> Serving Ras AL Khaimah
                 </div>
             </div>
         </div>
         
-        <a href="Al NOOR.pdf" class="website">Catalogue</a>
-        
-        <div class="nfc-indicator">
-            <span class="nfc-icon">📲</span> NFC Card Detected
+        <div class="navigation">
+            <div class="dot active" data-page="0"></div>
+            <div class="dot" data-page="1"></div>
+            <div class="dot" data-page="2"></div>
         </div>
-        
-       
     </div>
 
     <script>
-        // Simple animation when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            const card = document.querySelector('.card');
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
+            const pages = document.getElementById('pages');
+            const dots = document.querySelectorAll('.dot');
+            let currentPage = 0;
+            let startX = 0;
+            let endX = 0;
+            const minSwipeDistance = 50; // Minimum distance for a swipe to be detected
+            
+            // Initialize the first page with animation
+            pages.style.opacity = '0';
+            pages.style.transform = 'translateY(20px)';
             
             setTimeout(() => {
-                card.style.transition = 'opacity 0.5s, transform 0.5s';
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
+                pages.style.transition = 'opacity 0.5s, transform 0.5s';
+                pages.style.opacity = '1';
+                pages.style.transform = 'translateY(0)';
             }, 300);
             
-            // Function to update logo
-            function updateLogo() {
-                const logoUrl = prompt("Enter the URL of your logo image:");
-                if (logoUrl) {
-                    document.getElementById('logoImage').src = logoUrl;
-                }
+            // Function to go to a specific page
+            function goToPage(pageIndex) {
+                if (pageIndex < 0) pageIndex = 0;
+                if (pageIndex > 2) pageIndex = 2;
+                
+                pages.style.transform = `translateX(-${pageIndex * 33.333}%)`;
+                currentPage = pageIndex;
+                
+                // Update active dot
+                dots.forEach((dot, index) => {
+                    if (index === pageIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
             }
             
-            // Function to update WhatsApp icon
-            function updateWhatsAppIcon() {
-                const iconUrl = prompt("Enter the URL of your WhatsApp icon image:");
-                if (iconUrl) {
-                    document.getElementById('whatsappIcon').src = iconUrl;
-                }
-            }
+            // Touch events for swipe detection
+            pages.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+            });
             
-            // Uncomment the lines below if you want to enable image updates on click
-            // document.getElementById('logoImage').addEventListener('click', updateLogo);
-            // document.getElementById('whatsappIcon').addEventListener('click', updateWhatsAppIcon);
+            pages.addEventListener('touchmove', function(e) {
+                endX = e.touches[0].clientX;
+            });
+            
+            pages.addEventListener('touchend', function() {
+                const swipeDistance = endX - startX;
+                
+                if (Math.abs(swipeDistance) > minSwipeDistance) {
+                    if (swipeDistance > 0) {
+                        // Swipe right - go to previous page
+                        goToPage(currentPage - 1);
+                    } else {
+                        // Swipe left - go to next page
+                        goToPage(currentPage + 1);
+                    }
+                }
+            });
+            
+            // Mouse events for desktop swipe simulation
+            pages.addEventListener('mousedown', function(e) {
+                startX = e.clientX;
+                pages.style.cursor = 'grabbing';
+            });
+            
+            pages.addEventListener('mousemove', function(e) {
+                if (startX !== 0) {
+                    endX = e.clientX;
+                }
+            });
+            
+            pages.addEventListener('mouseup', function() {
+                if (startX !== 0) {
+                    const swipeDistance = endX - startX;
+                    
+                    if (Math.abs(swipeDistance) > minSwipeDistance) {
+                        if (swipeDistance > 0) {
+                            // Swipe right - go to previous page
+                            goToPage(currentPage - 1);
+                        } else {
+                            // Swipe left - go to next page
+                            goToPage(currentPage + 1);
+                        }
+                    }
+                    
+                    startX = 0;
+                    endX = 0;
+                    pages.style.cursor = 'grab';
+                }
+            });
+            
+            pages.addEventListener('mouseleave', function() {
+                startX = 0;
+                endX = 0;
+                pages.style.cursor = 'grab';
+            });
+            
+            // Click on dots to navigate
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const pageIndex = parseInt(this.getAttribute('data-page'));
+                    goToPage(pageIndex);
+                });
+            });
+            
+            // Set initial cursor for desktop
+            pages.style.cursor = 'grab';
         });
     </script>
 </body>
-
 </html>
