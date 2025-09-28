@@ -179,7 +179,7 @@
             margin-top: 20px;
         }
         
-        .services-list li {
+        .service-item {
             background-color: #f5f5f5;
             margin-bottom: 10px;
             padding: 15px;
@@ -187,14 +187,65 @@
             text-align: left;
             display: flex;
             align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        .services-list li:before {
+        .service-item:hover {
+            background-color: #e9e9e9;
+            transform: translateX(5px);
+        }
+        
+        .service-item.active {
+            background-color: #e0e8ff;
+            border-left: 4px solid #6e8efb;
+        }
+        
+        .service-item:before {
             content: "✓";
             color: #6e8efb;
             font-weight: bold;
             margin-right: 10px;
             font-size: 18px;
+        }
+        
+        .service-gallery {
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .service-gallery.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .gallery-title {
+            font-size: 18px;
+            color: #6e8efb;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .gallery-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border: 2px solid #f0f0f0;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.05);
+            border-color: #6e8efb;
         }
         
         /* Page 3 - Location */
@@ -253,6 +304,75 @@
             font-size: 14px;
             opacity: 0.7;
         }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 70%;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .image-caption {
+            color: white;
+            margin-top: 15px;
+            font-size: 16px;
+            text-align: center;
+            max-width: 80%;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .container {
+                height: 500px;
+            }
+            
+            .page {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .job-title {
+                font-size: 16px;
+            }
+            
+            .gallery-images {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -269,41 +389,29 @@
                 <div class="job-title">Ras AL Khaimah</div>
                 
                 <div class="contact-info">
-
-                      <div class="contact-item">
-                        <div class="icon">
-                            <img src="icons8-call-100.png" alt="WhatsApp" id="whatsappIcon">
-                        </div>
-                        <div class="contact-details">
-                            <div class="contact-type">Save Contact</div>
-                            <div class="contact-value">
-                                <a href="https://shafikvpz.github.io/AL-NOOR-/contact1.vcf" class="whatsapp-link">+(971) 509931312</a>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <div class="contact-item">
-                        <div class="icon">
-                            <img src="icons8-call-100.png" alt="WhatsApp" id="whatsappIcon">
-                        </div>
+                        <div class="icon"><img src="icons8-call-100.png" alt="Phone"></div>
                         <div class="contact-details">
-                            <div class="contact-type">Save Contact</div>
-                            <div class="contact-value">
-                                <a href="https://shafikvpz.github.io/AL-NOOR-/contact.vcf" class="whatsapp-link">+(971) 559278786</a>
-                            </div>
+                            <div class="contact-type">Call</div>
+                            <a href="tel:971559278786" class="whatsapp-link">+(971) 559278786</a>
                         </div>
                     </div>
-                    
+                    <div class="contact-item">
+                        <div class="icon"><img src="icons8-call-100.png" alt="Phone"></div>
+                        <div class="contact-details">
+                            <div class="contact-type">Call</div>
+                            <a href="tel:971509931312" class="whatsapp-link">+(971) 509931312</a>
+                        </div>
+                    </div>
 
                     <div class="contact-item">
                         <div class="icon">
                             <img src="icons8-whatsapp .gif" alt="WhatsApp" id="whatsappIcon">
                         </div>
                         <div class="contact-details">
-                             <a href="https://wa.me/971559278786" class="whatsapp-link">+(971) 559278786</a>
                             <div class="contact-type">WhatsApp</div>
                             <div class="contact-value">
-                              
+                                <a href="https://wa.me/971559278786" class="whatsapp-link">+(971) 559278786</a>
                             </div>
                         </div>
                     </div>
@@ -312,10 +420,9 @@
                             <img src="icons8-whatsapp .gif" alt="WhatsApp" id="whatsappIcon">
                         </div>
                         <div class="contact-details">
-                            <a href="https://wa.me/971509931312" class="whatsapp-link">+(971) 509931312</a>
                             <div class="contact-type">WhatsApp</div>
                             <div class="contact-value">
-                                
+                                <a href="https://wa.me/971509931312" class="whatsapp-link">+(971) 509931312</a>
                             </div>
                         </div>
                     </div>
@@ -325,15 +432,24 @@
                         <div class="contact-details">
                             <div class="contact-type">Email</div>
                             <div class="contact-value">alnooraluminium073@gmail.com</div>
-                             <a href="mailto:alnooraluminium073@gmail.com?subject=Contact%20Request&body=Hello%2C%20please%20send%20me%20more%20info.">Contact Us</a>
                         </div>
                     </div>
                     
-                   
-                  
+                    <div class="contact-item">
+                        <div class="icon">
+                            <img src="icons8-whatsapp .gif" alt="WhatsApp" id="whatsappIcon">
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-type">Save Contact</div>
+                            <div class="contact-value">
+                                <a href="http://127.0.0.1:5500/contact.vcf" class="whatsapp-link">+(971) 509931312</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <a href="Al NOOR.pdf" class="website">Catalogue</a>
+                <span>
+                    <a href="Al NOOR.pdf" class="website">Catalogue</a>
+                </span>
                 
                 <div class="nfc-indicator">
                     <span class="nfc-icon">📲</span> NFC Card Detected
@@ -346,15 +462,65 @@
                 <div class="job-title">Professional Steel & Aluminium Solutions</div>
                 
                 <ul class="services-list">
-                     <li>Car Parking</li>
-                    <li>Modern Car Parking</li>
-                    <li>Aluminium Windows & Doors</li>
-                    <li>Glass Installation Services</li>
-                    <li>Structural Steel Work</li>
-                    <li>Aluminium Cladding</li>
-                    <li>Commercial & Residential Projects</li>
-                    <li>Consultation & Design Services</li>
+                    <li class="service-item active" data-service="car-parking">Car Parking</li>
+                    <li class="service-item" data-service="modern-car-parking">Modern Car Parking</li>
+                    <li class="service-item" data-service="aluminium-windows">Aluminium Windows & Doors</li>
+                    <li class="service-item" data-service="glass-installation">Glass Installation Services</li>
+                    <li class="service-item" data-service="structural-steel">Structural Steel Work</li>
+                    <li class="service-item" data-service="aluminium-cladding">Aluminium Cladding</li>
+                    <li class="service-item" data-service="steel-repairs">Steel & Aluminium Repairs</li>
+                    <li class="service-item" data-service="commercial-residential">Commercial & Residential Projects</li>
+                    <li class="service-item" data-service="consultation">Consultation & Design Services</li>
                 </ul>
+                
+                <!-- Service Galleries -->
+                <div class="services-galleries">
+                    <!-- Car Parking Gallery -->
+                    <div class="service-gallery active" id="car-parking-gallery">
+                        <h3 class="gallery-title">Car Parking Solutions</h3>
+                        <div class="gallery-images">
+                            <img src="Md1.jpg" alt="Car Parking Structure" class="gallery-image">
+                            <img src="CP1.jpg" alt="Car Parking Design" class="gallery-image">
+                            <img src="CP3.jpg" alt="Parking Lot" class="gallery-image">
+                            <img src="CP4.jpg" alt="Multi-level Parking" class="gallery-image">
+                        </div>
+                    </div>
+                    
+                    <!-- Modern Car Parking Gallery -->
+                    <div class="service-gallery" id="modern-car-parking-gallery">
+                        <h3 class="gallery-title">Modern Car Parking Solutions</h3>
+                        <div class="gallery-images">
+                            <img src="https://images.unsplash.com/photo-1577702312597-03b67fc6f7ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Modern Parking Structure" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1556740714-a6a6c7f1b3bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Automated Parking" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Smart Parking System" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Modern Parking Design" class="gallery-image">
+                        </div>
+                    </div>
+                    
+                    <!-- Aluminium Windows & Doors Gallery -->
+                    <div class="service-gallery" id="aluminium-windows-gallery">
+                        <h3 class="gallery-title">Aluminium Windows & Doors</h3>
+                        <div class="gallery-images">
+                            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Aluminium Windows" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Sliding Doors" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Modern Windows" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Aluminium Frames" class="gallery-image">
+                        </div>
+                    </div>
+                    
+                    <!-- Glass Installation Gallery -->
+                    <div class="service-gallery" id="glass-installation-gallery">
+                        <h3 class="gallery-title">Glass Installation Services</h3>
+                        <div class="gallery-images">
+                            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Glass Installation" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Glass Structures" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Glass Windows" class="gallery-image">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Glass Doors" class="gallery-image">
+                        </div>
+                    </div>
+                    
+                    <!-- Add other service galleries here... -->
+                </div>
                 
                 <div class="nfc-indicator">
                     <span class="nfc-icon">🔧</span> Quality Craftsmanship
@@ -362,28 +528,7 @@
             </div>
             
             <!-- Page 3 - Location -->
-            <div class="page">
-                <h1>Our Location</h1>
-                <div class="job-title">Visit Us in Ras AL Khaimah</div>
-                
-                <div class="map-placeholder">
-                    [Map of Ras AL Khaimah]
-                </div>
-                
-                <div class="address">
-                    <h3>Business Address</h3>
-                    <p>AL NOOR STEEL & ALUMINIUM & Glass<br>
-                    Ras AL Khaimah, United Arab Emirates</p>
-                    
-                    <h3>Business Hours</h3>
-                    <p>Sunday - Thursday: 8:00 AM - 6:00 PM<br>
-                    Friday: Closed</p>
-                </div>
-                
-                <div class="nfc-indicator">
-                    <span class="nfc-icon">📍</span> Serving Ras AL Khaimah
-                </div>
-            </div>
+           
         </div>
         
         <div class="navigation">
@@ -393,6 +538,13 @@
         </div>
     </div>
 
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="image-caption" id="imageCaption">Image Description</div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const pages = document.getElementById('pages');
@@ -400,7 +552,65 @@
             let currentPage = 0;
             let startX = 0;
             let endX = 0;
-            const minSwipeDistance = 50; // Minimum distance for a swipe to be detected
+            const minSwipeDistance = 50;
+            
+            // Interactive Services Functionality
+            const serviceItems = document.querySelectorAll('.service-item');
+            const galleries = document.querySelectorAll('.service-gallery');
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const imageCaption = document.getElementById('imageCaption');
+            const closeModal = document.getElementById('closeModal');
+            const galleryImages = document.querySelectorAll('.gallery-image');
+            
+            // Service item click handler
+            serviceItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const serviceId = this.getAttribute('data-service');
+                    
+                    // Remove active class from all items
+                    serviceItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Hide all galleries
+                    galleries.forEach(gallery => gallery.classList.remove('active'));
+                    
+                    // Show the corresponding gallery
+                    const targetGallery = document.getElementById(`${serviceId}-gallery`);
+                    if (targetGallery) {
+                        targetGallery.classList.add('active');
+                    }
+                });
+            });
+            
+            // Gallery image click handler
+            galleryImages.forEach(image => {
+                image.addEventListener('click', function() {
+                    modalImage.src = this.src;
+                    imageCaption.textContent = this.alt;
+                    imageModal.style.display = 'flex';
+                });
+            });
+            
+            // Close modal handlers
+            closeModal.addEventListener('click', function() {
+                imageModal.style.display = 'none';
+            });
+            
+            imageModal.addEventListener('click', function(e) {
+                if (e.target === imageModal) {
+                    imageModal.style.display = 'none';
+                }
+            });
+            
+            // Keyboard support for modal
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && imageModal.style.display === 'flex') {
+                    imageModal.style.display = 'none';
+                }
+            });
             
             // Initialize the first page with animation
             pages.style.opacity = '0';
@@ -504,11 +714,4 @@
         });
     </script>
 </body>
-
 </html>
-
-
-
-
-
-
