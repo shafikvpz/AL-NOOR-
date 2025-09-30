@@ -1,717 +1,652 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Card</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1c2342, #491c75);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow: hidden;
-        }
-        
-        .container {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-            height: 600px;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .pages {
-            display: flex;
-            width: 300%;
-            height: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-        
-        .page {
-            width: 33.333%;
-            height: 100%;
-            background-color: white;
-            padding: 30px;
-            text-align: center;
-            overflow-y: auto;
-        }
-        
-        /* Page 1 - Contact Card */
-        .logo-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            border: 4px solid #f0f0f0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        
-        .logo {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 10px;
-        }
-        
-        h1 {
-            font-size: 28px;
-            margin-bottom: 5px;
-            color: #6e8efb;
-        }
-        
-        .job-title {
-            font-size: 18px;
-            color: #6e8efb;
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-        
-        .contact-info {
-            margin: 25px 0;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 10px;
-            transition: background-color 0.3s;
-        }
-        
-        .contact-item:hover {
-            background-color: #f5f5f5;
-        }
-        
-        .icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 15px;
-            color: #6e8efb;
-            overflow: hidden;
-        }
-        
-        .icon img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
-        
-        .contact-details {
-            text-align: left;
-            flex: 1;
-        }
-        
-        .contact-type {
-            font-size: 12px;
-            color: #888;
-            margin-bottom: 3px;
-        }
-        
-        .contact-value {
-            font-size: 16px;
-            color: #333;
-            font-weight: 500;
-        }
-        
-        .website {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .website:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nfc-indicator {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #888;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .nfc-icon {
-            margin-right: 8px;
-            font-size: 18px;
-        }
-        
-        .whatsapp-link {
-           color: #6e8efb;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        /* Page 2 - Services */
-        .services-list {
-            list-style-type: none;
-            margin-top: 20px;
-        }
-        
-        .service-item {
-            background-color: #f5f5f5;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .service-item:hover {
-            background-color: #e9e9e9;
-            transform: translateX(5px);
-        }
-        
-        .service-item.active {
-            background-color: #e0e8ff;
-            border-left: 4px solid #6e8efb;
-        }
-        
-        .service-item:before {
-            content: "✓";
-            color: #6e8efb;
-            font-weight: bold;
-            margin-right: 10px;
-            font-size: 18px;
-        }
-        
-        .service-gallery {
-            margin-top: 20px;
-            display: none;
-        }
-        
-        .service-gallery.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .gallery-title {
-            font-size: 18px;
-            color: #6e8efb;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .gallery-images {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .gallery-image {
-            width: 100%;
-            height: 120px;
-            border-radius: 8px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            border: 2px solid #f0f0f0;
-        }
-        
-        .gallery-image:hover {
-            transform: scale(1.05);
-            border-color: #6e8efb;
-        }
-        
-        /* Page 3 - Location */
-        .map-placeholder {
-            width: 100%;
-            height: 200px;
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #888;
-        }
-        
-        .address {
-            background-color: #f5f5f5;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: left;
-        }
-        
-        /* Navigation dots */
-        .navigation {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #ccc;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .dot.active {
-            background-color: #6e8efb;
-        }
-        
-        /* Swipe instructions */
-        .swipe-instructions {
-            position: absolute;
-            top: 20px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: #888;
-            font-size: 14px;
-            opacity: 0.7;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al Noor Services</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        /* Image Modal */
-        .image-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        
-        .modal-content {
-            max-width: 90%;
-            max-height: 70%;
-            border-radius: 10px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
-        }
-        
-        .image-caption {
-            color: white;
-            margin-top: 15px;
-            font-size: 16px;
-            text-align: center;
-            max-width: 80%;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 1001;
-        }
+    body {
+      background: linear-gradient(135deg, #1c2342, #491c75);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow: hidden;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 600px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      background-color: white;
+    }
 
-        /* Responsive adjustments */
-        @media (max-width: 480px) {
-            .container {
-                height: 500px;
-            }
-            
-            .page {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 24px;
-            }
-            
-            .job-title {
-                font-size: 16px;
-            }
-            
-            .gallery-images {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    .pages {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .page {
+      width: 33.333%;
+      height: 100%;
+      background-color: white;
+      padding: 30px;
+      text-align: center;
+      overflow-y: auto;
+    }
+
+    /* Page 1 – Contact Card */
+    .logo-container {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 20px;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      border: 4px solid #f0f0f0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 10px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+      color: #6e8efb;
+    }
+
+    .job-title {
+      font-size: 18px;
+      color: #6e8efb;
+      margin-bottom: 25px;
+      font-weight: 500;
+    }
+
+    .contact-info {
+      margin: 25px 0;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .contact-item:hover {
+      background-color: #f5f5f5;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+      color: #6e8efb;
+      overflow: hidden;
+    }
+
+    .icon img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .contact-details {
+      text-align: left;
+      flex: 1;
+    }
+
+    .contact-type {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 3px;
+    }
+
+    .contact-value {
+      font-size: 16px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .website {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #6e8efb, #a777e3);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .website:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .nfc-indicator {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nfc-icon {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+
+    .whatsapp-link {
+      color: #6e8efb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Page 2 - Services */
+    .services-list {
+      list-style-type: none;
+      margin-top: 20px;
+    }
+
+    .service-item {
+      background-color: #f5f5f5;
+      margin-bottom: 10px;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .service-item:hover {
+      background-color: #e9e9e9;
+      transform: translateX(5px);
+    }
+
+    .service-item.active {
+      background-color: #e0e8ff;
+      border-left: 4px solid #6e8efb;
+    }
+
+    .service-item:before {
+      content: "✓";
+      color: #6e8efb;
+      font-weight: bold;
+      margin-right: 10px;
+      font-size: 18px;
+    }
+
+    /* Page 3 - Gallery */
+    .service-gallery {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .service-gallery.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .gallery-title {
+      font-size: 22px;
+      color: #6e8efb;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .gallery-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .gallery-image {
+      width: 100%;
+      height: 140px;
+      border-radius: 10px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      border: 2px solid #f0f0f0;
+    }
+
+    .gallery-image:hover {
+      transform: scale(1.05);
+      border-color: #6e8efb;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #6e8efb;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .back-button:hover {
+      background: #5a7dfa;
+      transform: translateY(-2px);
+    }
+
+    /* Navigation dots */
+    .navigation {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: #6e8efb;
+    }
+
+    /* Image Modal */
+    .image-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .image-modal .modal-content {
+      max-width: 90%;
+      max-height: 70%;
+      border-radius: 10px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .image-caption {
+      color: white;
+      margin-top: 15px;
+      font-size: 16px;
+      text-align: center;
+      max-width: 80%;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        height: 500px;
+      }
+
+      .page {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .job-title {
+        font-size: 16px;
+      }
+
+      .gallery-images {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-image {
+        height: 120px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="swipe-instructions">Swipe left or right to navigate</div>
-        
-        <div class="pages" id="pages">
-            <!-- Page 1 - Contact Card -->
-            <div class="page">
-                <div class="logo-container">
-                    <img src="Logo.jpeg" alt="Your Logo" class="logo" id="logoImage">
-                </div>
-                <h1>AL NOOR STEEL & ALUMINIUM & Glass</h1>
-                <div class="job-title">Ras AL Khaimah</div>
-                
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="icon"><img src="icons8-call-100.png" alt="Phone"></div>
-                        <div class="contact-details">
-                            <div class="contact-type">Call</div>
-                            <a href="tel:971559278786" class="whatsapp-link">+(971) 559278786</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="icon"><img src="icons8-call-100.png" alt="Phone"></div>
-                        <div class="contact-details">
-                            <div class="contact-type">Call</div>
-                            <a href="tel:971509931312" class="whatsapp-link">+(971) 509931312</a>
-                        </div>
-                    </div>
+  <div class="container">
+    <div class="pages" id="pages">
+      <!-- Page 1 - Contact -->
+      <div class="page active">
+        <div class="logo-container">
+          <img src="Logo.jpeg" alt="Your Logo" class="logo" id="logoImage">
+        </div>
+        <h1>AL NOOR STEEL & ALUMINIUM & Glass</h1>
+        <div class="job-title">Ras AL Khaimah</div>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="icon"><img src="icons8-call-100.png" alt="Phone"></div>
+            <div class="contact-details">
+              <div class="contact-type">Call</div>
+              <a href="tel:971559278786" class="whatsapp-link">+(971) 559278786</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="icon"><img src="icons8-call-100.png" alt="Phone"></div>
+            <div class="contact-details">
+              <div class="contact-type">Call</div>
+              <a href="tel:971509931312" class="whatsapp-link">+(971) 509931312</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="icon"><img src="icons8-whatsapp.gif" alt="WhatsApp"></div>
+            <div class="contact-details">
+              <div class="contact-type">WhatsApp</div>
+              <div class="contact-value">
+                <a href="https://wa.me/971559278786" class="whatsapp-link">+(971) 559278786</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="icon"><img src="icons8-whatsapp.gif" alt="WhatsApp"></div>
+            <div class="contact-details">
+              <div class="contact-type">WhatsApp</div>
+              <div class="contact-value">
+                <a href="https://wa.me/971509931312" class="whatsapp-link">+(971) 509931312</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="icon"><img src="icons8-email-100.png" alt="Email"></div>
+            <div class="contact-details">
+              <div class="contact-type">Email</div>
+              <div class="contact-value">alnooraluminium073@gmail.com</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="icon"><img src="icons8-whatsapp.gif" alt="Save Contact"></div>
+            <div class="contact-details">
+              <div class="contact-type">Save Contact</div>
+              <div class="contact-value">
+                <a href="contact.vcf" class="whatsapp-link">+(971) 509931312</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span>
+          <a href="Al NOOR.pdf" class="website">Catalogue</a>
+        </span>
+        <div class="nfc-indicator">
+          <span class="nfc-icon">📲</span> NFC Card Detected
+        </div>
+      </div>
 
-                    <div class="contact-item">
-                        <div class="icon">
-                            <img src="icons8-whatsapp .gif" alt="WhatsApp" id="whatsappIcon">
-                        </div>
-                        <div class="contact-details">
-                            <div class="contact-type">WhatsApp</div>
-                            <div class="contact-value">
-                                <a href="https://wa.me/971559278786" class="whatsapp-link">+(971) 559278786</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="icon">
-                            <img src="icons8-whatsapp .gif" alt="WhatsApp" id="whatsappIcon">
-                        </div>
-                        <div class="contact-details">
-                            <div class="contact-type">WhatsApp</div>
-                            <div class="contact-value">
-                                <a href="https://wa.me/971509931312" class="whatsapp-link">+(971) 509931312</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="icon"><img src="icons8-email-100.png" alt="Email"></div>
-                        <div class="contact-details">
-                            <div class="contact-type">Email</div>
-                            <div class="contact-value">alnooraluminium073@gmail.com</div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="icon">
-                            <img src="icons8-whatsapp .gif" alt="WhatsApp" id="whatsappIcon">
-                        </div>
-                        <div class="contact-details">
-                            <div class="contact-type">Save Contact</div>
-                            <div class="contact-value">
-                                <a href="http://127.0.0.1:5500/contact.vcf" class="whatsapp-link">+(971) 509931312</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <span>
-                    <a href="Al NOOR.pdf" class="website">Catalogue</a>
-                </span>
-                
-                <div class="nfc-indicator">
-                    <span class="nfc-icon">📲</span> NFC Card Detected
-                </div>
-            </div>
-            
-            <!-- Page 2 - Services -->
-            <div class="page">
-                <h1>Our Services</h1>
-                <div class="job-title">Professional Steel & Aluminium Solutions</div>
-                
-                <ul class="services-list">
-                    <li class="service-item active" data-service="car-parking">Car Parking</li>
-                    <li class="service-item" data-service="modern-car-parking">Modern Car Parking</li>
-                    <li class="service-item" data-service="aluminium-windows">Aluminium Windows & Doors</li>
-                    <li class="service-item" data-service="glass-installation">Glass Installation Services</li>
-                    <li class="service-item" data-service="structural-steel">Structural Steel Work</li>
-                    <li class="service-item" data-service="aluminium-cladding">Aluminium Cladding</li>
-                    <li class="service-item" data-service="steel-repairs">Steel & Aluminium Repairs</li>
-                    <li class="service-item" data-service="commercial-residential">Commercial & Residential Projects</li>
-                    <li class="service-item" data-service="consultation">Consultation & Design Services</li>
-                </ul>
-                
-                <!-- Service Galleries -->
-                <div class="services-galleries">
-                    <!-- Car Parking Gallery -->
-                    <div class="service-gallery active" id="car-parking-gallery">
-                        <h3 class="gallery-title">Car Parking Solutions</h3>
-                        <div class="gallery-images">
-                            <img src="Md1.jpg" alt="Car Parking Structure" class="gallery-image">
-                            <img src="CP1.jpg" alt="Car Parking Design" class="gallery-image">
-                            <img src="CP3.jpg" alt="Parking Lot" class="gallery-image">
-                            <img src="CP4.jpg" alt="Multi-level Parking" class="gallery-image">
-                        </div>
-                    </div>
-                    
-                    <!-- Modern Car Parking Gallery -->
-                    <div class="service-gallery" id="modern-car-parking-gallery">
-                        <h3 class="gallery-title">Modern Car Parking Solutions</h3>
-                        <div class="gallery-images">
-                            <img src="https://images.unsplash.com/photo-1577702312597-03b67fc6f7ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Modern Parking Structure" class="gallery-image">
-                            <img src="https://images.unsplash.com/photo-1556740714-a6a6c7f1b3bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Automated Parking" class="gallery-image">
-                            <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Smart Parking System" class="gallery-image">
-                            <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Modern Parking Design" class="gallery-image">
-                        </div>
-                    </div>
-                    
-                    <!-- Aluminium Windows & Doors Gallery -->
-                    <div class="service-gallery" id="aluminium-windows-gallery">
-                        <h3 class="gallery-title">Aluminium Windows & Doors</h3>
-                        <div class="gallery-images">
-                            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Aluminium Windows" class="gallery-image">
-                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Sliding Doors" class="gallery-image">
-                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Modern Windows" class="gallery-image">
-                            <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Aluminium Frames" class="gallery-image">
-                        </div>
-                    </div>
-                    
-                    <!-- Glass Installation Gallery -->
-                    <div class="service-gallery" id="glass-installation-gallery">
-                        <h3 class="gallery-title">Glass Installation Services</h3>
-                        <div class="gallery-images">
-                            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Glass Installation" class="gallery-image">
-                            <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Glass Structures" class="gallery-image">
-                            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Glass Windows" class="gallery-image">
-                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Glass Doors" class="gallery-image">
-                        </div>
-                    </div>
-                    
-                    <!-- Add other service galleries here... -->
-                </div>
-                
-                <div class="nfc-indicator">
-                    <span class="nfc-icon">🔧</span> Quality Craftsmanship
-                </div>
-            </div>
-            
-            <!-- Page 3 - Location -->
-           
+      <!-- Page 2 - Services -->
+      <div class="page">
+        <h1>Our Services</h1>
+        <div class="job-title">Professional Steel & Aluminium Solutions</div>
+        <ul class="services-list">
+          <li class="service-item active" data-service="pvccar-parking">PVC Car Parking</li>
+          <li class="service-item" data-service="modern-car-parking">Modern Car Parking</li>
+          <li class="service-item" data-service="aluminium-doors">Aluminium Doors</li>
+          <!-- Add more service items as needed -->
+        </ul>
+        <div class="nfc-indicator">
+          <span class="nfc-icon">🔧</span> Click on a service to view images
         </div>
-        
-        <div class="navigation">
-            <div class="dot active" data-page="0"></div>
-            <div class="dot" data-page="1"></div>
-            <div class="dot" data-page="2"></div>
+      </div>
+
+      <!-- Page 3 - Gallery Display -->
+      <div class="page">
+        <h1 id="gallery-service-title">Project Gallery</h1>
+        <div class="job-title" id="gallery-service-subtitle">Select a service to view images</div>
+        <div id="gallery-container">
+          <!-- Dynamic galleries will be injected here -->
+          <div class="service-gallery active" id="default-gallery">
+            <div class="gallery-images">
+              <div style="text-align: center; padding: 40px; color: #888;">
+                <p>Please select a service from Page 2 to view project images</p>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="nfc-indicator">
+          <span class="nfc-icon">🖼️</span> Project Gallery
+        </div>
+      </div>
     </div>
 
-    <!-- Image Modal -->
-    <div class="image-modal" id="imageModal">
-        <span class="close-modal" id="closeModal">&times;</span>
-        <img class="modal-content" id="modalImage">
-        <div class="image-caption" id="imageCaption">Image Description</div>
+    <div class="navigation">
+      <div class="dot active" data-page="0"></div>
+      <div class="dot" data-page="1"></div>
+      <div a class="dot" data-page="2"></div>
     </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const pages = document.getElementById('pages');
-            const dots = document.querySelectorAll('.dot');
-            let currentPage = 0;
-            let startX = 0;
-            let endX = 0;
-            const minSwipeDistance = 50;
-            
-            // Interactive Services Functionality
-            const serviceItems = document.querySelectorAll('.service-item');
-            const galleries = document.querySelectorAll('.service-gallery');
-            const imageModal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            const imageCaption = document.getElementById('imageCaption');
-            const closeModal = document.getElementById('closeModal');
-            const galleryImages = document.querySelectorAll('.gallery-image');
-            
-            // Service item click handler
-            serviceItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const serviceId = this.getAttribute('data-service');
-                    
-                    // Remove active class from all items
-                    serviceItems.forEach(i => i.classList.remove('active'));
-                    
-                    // Add active class to clicked item
-                    this.classList.add('active');
-                    
-                    // Hide all galleries
-                    galleries.forEach(gallery => gallery.classList.remove('active'));
-                    
-                    // Show the corresponding gallery
-                    const targetGallery = document.getElementById(`${serviceId}-gallery`);
-                    if (targetGallery) {
-                        targetGallery.classList.add('active');
-                    }
-                });
+  <!-- Image Modal -->
+  <div class="image-modal" id="imageModal">
+    <span class="close-modal" id="closeModal">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div class="image-caption" id="imageCaption">Image Description</div>
+  </div>
+
+  <script>
+    let currentPage = 0;
+    const pages = document.getElementById('pages');
+    const dots = document.querySelectorAll('.dot');
+
+    function goToPage(pageIndex) {
+      if (pageIndex < 0) pageIndex = 0;
+      if (pageIndex > 2) pageIndex = 2;
+      pages.style.transform = `translateX(-${pageIndex * 33.333}%)`;
+      currentPage = pageIndex;
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === pageIndex);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const serviceItems = document.querySelectorAll('.service-item');
+      const galleryContainer = document.getElementById('gallery-container');
+      const galleryServiceTitle = document.getElementById('gallery-service-title');
+      const galleryServiceSubtitle = document.getElementById('gallery-service-subtitle');
+      const imageModal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      const imageCaption = document.getElementById('imageCaption');
+      const closeModal = document.getElementById('closeModal');
+
+      // Define mapping from service id to folder + files
+      const serviceImages = {
+        'pvccar-parking': {
+          folder: 'images/PvcCarParking/',
+          files: ['pvc1.jpeg', 'pvc2.jpeg', 'pvc3.jpeg', 'pvc4.jpeg','pvc5.jpeg','pvc6.jpeg','pvc7.jpeg','pvc8.jpeg']
+        },
+        
+        'modern-car-parking': {
+          folder: 'images/modern-car-parking/',
+          files: ['MP1.jpg', 'MP2.jpg', 'MP3.jpg', 'MP4.jpg']
+        },
+        'aluminium-doors': {
+          folder: 'images/aluminium-doors/',
+          files: ['AD1.jpg', 'AD2.jpg']
+        }
+      };
+
+      serviceItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const serviceId = item.getAttribute('data-service');
+          const serviceName = item.textContent;
+
+          serviceItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+
+          galleryServiceTitle.textContent = serviceName;
+          galleryServiceSubtitle.textContent = "Project Gallery";
+
+          // Clear existing galleries
+          galleryContainer.innerHTML = '';
+
+          const info = serviceImages[serviceId];
+          if (info) {
+            const galleryDiv = document.createElement('div');
+            galleryDiv.classList.add('service-gallery', 'active');
+
+            const titleEl = document.createElement('h3');
+            titleEl.className = 'gallery-title';
+            titleEl.textContent = serviceName;
+            galleryDiv.appendChild(titleEl);
+
+            const galleryImgsDiv = document.createElement('div');
+            galleryImgsDiv.className = 'gallery-images';
+
+            info.files.forEach(file => {
+              const img = document.createElement('img');
+              img.src = info.folder + file;
+              img.alt = file;
+              img.className = 'gallery-image';
+              img.addEventListener('click', () => {
+                modalImage.src = img.src;
+                imageCaption.textContent = img.alt;
+                imageModal.style.display = 'flex';
+              });
+              galleryImgsDiv.appendChild(img);
             });
-            
-            // Gallery image click handler
-            galleryImages.forEach(image => {
-                image.addEventListener('click', function() {
-                    modalImage.src = this.src;
-                    imageCaption.textContent = this.alt;
-                    imageModal.style.display = 'flex';
-                });
-            });
-            
-            // Close modal handlers
-            closeModal.addEventListener('click', function() {
-                imageModal.style.display = 'none';
-            });
-            
-            imageModal.addEventListener('click', function(e) {
-                if (e.target === imageModal) {
-                    imageModal.style.display = 'none';
-                }
-            });
-            
-            // Keyboard support for modal
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && imageModal.style.display === 'flex') {
-                    imageModal.style.display = 'none';
-                }
-            });
-            
-            // Initialize the first page with animation
-            pages.style.opacity = '0';
-            pages.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                pages.style.transition = 'opacity 0.5s, transform 0.5s';
-                pages.style.opacity = '1';
-                pages.style.transform = 'translateY(0)';
-            }, 300);
-            
-            // Function to go to a specific page
-            function goToPage(pageIndex) {
-                if (pageIndex < 0) pageIndex = 0;
-                if (pageIndex > 2) pageIndex = 2;
-                
-                pages.style.transform = `translateX(-${pageIndex * 33.333}%)`;
-                currentPage = pageIndex;
-                
-                // Update active dot
-                dots.forEach((dot, index) => {
-                    if (index === pageIndex) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-            }
-            
-            // Touch events for swipe detection
-            pages.addEventListener('touchstart', function(e) {
-                startX = e.touches[0].clientX;
-            });
-            
-            pages.addEventListener('touchmove', function(e) {
-                endX = e.touches[0].clientX;
-            });
-            
-            pages.addEventListener('touchend', function() {
-                const swipeDistance = endX - startX;
-                
-                if (Math.abs(swipeDistance) > minSwipeDistance) {
-                    if (swipeDistance > 0) {
-                        // Swipe right - go to previous page
-                        goToPage(currentPage - 1);
-                    } else {
-                        // Swipe left - go to next page
-                        goToPage(currentPage + 1);
-                    }
-                }
-            });
-            
-            // Mouse events for desktop swipe simulation
-            pages.addEventListener('mousedown', function(e) {
-                startX = e.clientX;
-                pages.style.cursor = 'grabbing';
-            });
-            
-            pages.addEventListener('mousemove', function(e) {
-                if (startX !== 0) {
-                    endX = e.clientX;
-                }
-            });
-            
-            pages.addEventListener('mouseup', function() {
-                if (startX !== 0) {
-                    const swipeDistance = endX - startX;
-                    
-                    if (Math.abs(swipeDistance) > minSwipeDistance) {
-                        if (swipeDistance > 0) {
-                            // Swipe right - go to previous page
-                            goToPage(currentPage - 1);
-                        } else {
-                            // Swipe left - go to next page
-                            goToPage(currentPage + 1);
-                        }
-                    }
-                    
-                    startX = 0;
-                    endX = 0;
-                    pages.style.cursor = 'grab';
-                }
-            });
-            
-            pages.addEventListener('mouseleave', function() {
-                startX = 0;
-                endX = 0;
-                pages.style.cursor = 'grab';
-            });
-            
-            // Click on dots to navigate
-            dots.forEach(dot => {
-                dot.addEventListener('click', function() {
-                    const pageIndex = parseInt(this.getAttribute('data-page'));
-                    goToPage(pageIndex);
-                });
-            });
-            
-            // Set initial cursor for desktop
-            pages.style.cursor = 'grab';
+
+            galleryDiv.appendChild(galleryImgsDiv);
+
+            const backBtn = document.createElement('button');
+            backBtn.className = 'back-button';
+            backBtn.textContent = '← Back to Services';
+            backBtn.onclick = () => goToPage(1);
+            galleryDiv.appendChild(backBtn);
+
+            galleryContainer.appendChild(galleryDiv);
+          }
+
+          goToPage(2);
         });
-    </script>
+      });
+
+      closeModal.addEventListener('click', () => {
+        imageModal.style.display = 'none';
+      });
+
+      imageModal.addEventListener('click', (e) => {
+        if (e.target === imageModal) {
+          imageModal.style.display = 'none';
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && imageModal.style.display === 'flex') {
+          imageModal.style.display = 'none';
+        }
+      });
+
+      // Swipe / Mouse drag
+      let startX = 0, endX = 0;
+      const minSwipe = 50;
+
+      pages.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+      pages.addEventListener('touchmove', e => endX = e.touches[0].clientX);
+      pages.addEventListener('touchend', () => {
+        const diff = endX - startX;
+        if (Math.abs(diff) > minSwipe) {
+          if (diff > 0) goToPage(currentPage - 1);
+          else goToPage(currentPage + 1);
+        }
+        startX = endX = 0;
+      });
+
+      pages.addEventListener('mousedown', e => {
+        startX = e.clientX;
+        pages.style.cursor = 'grabbing';
+      });
+      pages.addEventListener('mousemove', e => {
+        if (startX !== 0) endX = e.clientX;
+      });
+      pages.addEventListener('mouseup', () => {
+        const diff = endX - startX;
+        if (Math.abs(diff) > minSwipe) {
+          if (diff > 0) goToPage(currentPage - 1);
+          else goToPage(currentPage + 1);
+        }
+        startX = endX = 0;
+        pages.style.cursor = 'grab';
+      });
+      pages.addEventListener('mouseleave', () => {
+        startX = endX = 0;
+        pages.style.cursor = 'grab';
+      });
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const idx = parseInt(dot.getAttribute('data-page'));
+          goToPage(idx);
+        });
+      });
+
+      pages.style.cursor = 'grab';
+    });
+  </script>
 </body>
 </html>
