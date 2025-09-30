@@ -23,15 +23,25 @@
     }
 
     .container {
-      position: relative;
-      width: 100%;
-      max-width: 400px;
-      height: 900px;
-      overflow: hidden;
-      border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-      background-color: white;
-    }
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 80vh; /* Use viewport height */
+  min-height: 600px; /* Minimum height */
+  max-height: 800px; /* Maximum height */
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+
+@media (max-width: 480px) {
+  .container {
+    height: 85vh; /* Even taller on mobile */
+    min-height: 550px;
+    max-height: 700px;
+  }
+}
 
     .pages {
       display: flex;
@@ -649,6 +659,7 @@
   </script>
 </body>
 </html>
+
 
 
 
