@@ -23,25 +23,17 @@
     }
 
     .container {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  height: 80vh; /* Use viewport height */
-  min-height: 600px; /* Minimum height */
-  max-height: 800px; /* Maximum height */
-  overflow: hidden;
-  border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  background-color: white;
-}
-
-@media (max-width: 480px) {
-  .container {
-    height: 85vh; /* Even taller on mobile */
-    min-height: 550px;
-    max-height: 700px;
-  }
-}
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 95vh; /* Changed to viewport height */
+      min-height: 600px; /* Minimum height */
+      max-height: 800px; /* Maximum height */
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      background-color: white;
+    }
 
     .pages {
       display: flex;
@@ -57,6 +49,8 @@
       padding: 30px;
       text-align: center;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Page 1 – Contact Card */
@@ -96,6 +90,7 @@
 
     .contact-info {
       margin: 25px 0;
+      flex: 1;
     }
 
     .contact-item {
@@ -188,6 +183,7 @@
     .services-list {
       list-style-type: none;
       margin-top: 20px;
+      flex: 1;
     }
 
     .service-item {
@@ -224,10 +220,12 @@
     .service-gallery {
       margin-top: 20px;
       display: none;
+      flex: 1;
     }
 
     .service-gallery.active {
-      display: block;
+      display: flex;
+      flex-direction: column;
       animation: fadeIn 0.5s ease;
     }
 
@@ -243,6 +241,8 @@
       grid-template-columns: 1fr 1fr;
       gap: 15px;
       margin-bottom: 20px;
+      flex: 1;
+      overflow-y: auto;
     }
 
     .gallery-image {
@@ -355,9 +355,19 @@
       }
     }
 
+    /* Mobile Styles */
     @media (max-width: 480px) {
+      body {
+        padding: 10px;
+        align-items: flex-start;
+        min-height: 100vh;
+      }
+
       .container {
-        height: 500px;
+        height: 95vh;
+        min-height: auto;
+        max-height: none;
+        width: 100%;
       }
 
       .page {
@@ -370,14 +380,70 @@
 
       .job-title {
         font-size: 16px;
+        margin-bottom: 20px;
       }
 
       .gallery-images {
         grid-template-columns: 1fr;
+        gap: 12px;
       }
 
       .gallery-image {
         height: 120px;
+      }
+
+      .contact-info {
+        margin: 15px 0;
+      }
+
+      .services-list {
+        margin-top: 15px;
+      }
+
+      .service-item {
+        padding: 12px;
+        margin-bottom: 8px;
+      }
+    }
+
+    /* For very small screens */
+    @media (max-width: 380px) {
+      .container {
+        height: 92vh;
+      }
+      
+      .page {
+        padding: 15px;
+      }
+      
+      .gallery-image {
+        height: 100px;
+      }
+    }
+
+    /* For landscape orientation */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .container {
+        height: 98vh;
+        max-width: 350px;
+      }
+      
+      .page {
+        padding: 15px;
+      }
+      
+      .gallery-image {
+        height: 80px;
+      }
+      
+      .contact-item {
+        padding: 8px;
+        margin-bottom: 8px;
+      }
+      
+      .service-item {
+        padding: 10px;
+        margin-bottom: 6px;
       }
     }
   </style>
@@ -488,7 +554,7 @@
     <div class="navigation">
       <div class="dot active" data-page="0"></div>
       <div class="dot" data-page="1"></div>
-      <div a class="dot" data-page="2"></div>
+      <div class="dot" data-page="2"></div>
     </div>
   </div>
 
@@ -500,6 +566,7 @@
   </div>
 
   <script>
+    // Your existing JavaScript code remains the same
     let currentPage = 0;
     const pages = document.getElementById('pages');
     const dots = document.querySelectorAll('.dot');
@@ -524,21 +591,20 @@
       const imageCaption = document.getElementById('imageCaption');
       const closeModal = document.getElementById('closeModal');
 
-      // Define mapping from service id to folder + files
-     const serviceImages = {
-  'pvccar-parking': {
-    folder: 'Images/PvcCarParking/',  // Add trailing slash here
-    files: ['pvc1.jpeg', 'pvc2.jpeg','pvc3.jpeg','pvc4.jpeg','pvc5.jpeg','pvc6.jpeg','pvc7.jpeg','pvc8.jpeg','pvc9.jpeg','pvc10.jpeg','pvc11.jpeg','pvc12.jpeg','pvc13.jpeg','pvc14.jpeg','pvc15.jpeg','pvc16.jpeg','pvc17.jpeg']
-  },
-  'modern-car-parking': {
-    folder: 'images/modern-car-parking/',
-    files: ['MP1.jpg', 'MP2.jpg', 'MP3.jpg', 'MP4.jpg']
-  },
-  'aluminium-doors': {
-    folder: 'images/aluminium-doors/',
-    files: ['AD1.jpg', 'AD2.jpg']
-  }
-};
+      const serviceImages = {
+        'pvccar-parking': {
+          folder: 'Images/PvcCarParking/',
+          files: ['pvc1.jpeg', 'pvc2.jpeg']
+        },
+        'modern-car-parking': {
+          folder: 'images/modern-car-parking/',
+          files: ['MP1.jpg', 'MP2.jpg', 'MP3.jpg', 'MP4.jpg']
+        },
+        'aluminium-doors': {
+          folder: 'images/aluminium-doors/',
+          files: ['AD1.jpg', 'AD2.jpg']
+        }
+      };
 
       serviceItems.forEach(item => {
         item.addEventListener('click', () => {
@@ -551,7 +617,6 @@
           galleryServiceTitle.textContent = serviceName;
           galleryServiceSubtitle.textContent = "Project Gallery";
 
-          // Clear existing galleries
           galleryContainer.innerHTML = '';
 
           const info = serviceImages[serviceId];
@@ -611,7 +676,6 @@
         }
       });
 
-      // Swipe / Mouse drag
       let startX = 0, endX = 0;
       const minSwipe = 50;
 
@@ -659,8 +723,6 @@
   </script>
 </body>
 </html>
-
-
 
 
 
