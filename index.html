@@ -515,21 +515,21 @@
       const closeModal = document.getElementById('closeModal');
 
       // Define mapping from service id to folder + files
-     const serviceImages = {
-  'pvccar-parking': {
-    folder: 'Images/pvc-car-parking',
-    files: ['pvc1.jpg', 'pvc2.jpg', 'pvc3.jpg', 'mp4.jpg']
-  },
-  'modern-car-parking': {
-    folder: 'images/modern-car-parking/',
-    files: ['mp1.jpg', 'mp2.jpg', 'mp3.jpg', 'mp4.jpg']
-  },
-  'aluminium-doors': {
-    folder: 'images/aluminium-doors/',
-    files: ['ad1.jpg', 'ad2.jpg']
-  }
-};
-
+      const serviceImages = {
+        'pvccar-parking': {
+          folder: 'Images/PvcCarParking',
+          files: ['pvc1.jpeg', 'pvc2.jpeg', 'pvc3.jpeg', 'pvc4.jpeg','pvc5.jpeg','pvc6.jpeg','pvc7.jpeg','pvc8.jpeg']
+        },
+        
+        'modern-car-parking': {
+          folder: 'images/modern-car-parking/',
+          files: ['MP1.jpg', 'MP2.jpg', 'MP3.jpg', 'MP4.jpg']
+        },
+        'aluminium-doors': {
+          folder: 'images/aluminium-doors/',
+          files: ['AD1.jpg', 'AD2.jpg']
+        }
+      };
 
       serviceItems.forEach(item => {
         item.addEventListener('click', () => {
@@ -650,11 +650,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
