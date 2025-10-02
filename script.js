@@ -23,21 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeModal = document.getElementById('closeModal');
 
   // Define mapping from service id to folder + files
-  const serviceImages = {
-    'pvccar-parking': {
-      folder: 'images/PvcCarParking/',
-      files: ['pvc1.jpeg', 'pvc2.jpeg', 'pvc3.jpeg', 'pvc4.jpeg','pvc5.jpeg','pvc6.jpeg','pvc7.jpeg','pvc8.jpeg']
-    },
-    
-    'modern-car-parking': {
-      folder: 'images/modern-car-parking/',
-      files: ['MP1.jpg', 'MP2.jpg', 'MP3.jpg', 'MP4.jpg']
-    },
-    'aluminium-doors': {
-      folder: 'images/aluminium-doors/',
-      files: ['AD1.jpg', 'AD2.jpg']
-    }
-  };
+ // Define mapping from service id to folder + files
+   const serviceImages = {
+        'pvccar-parking': {
+          folder: 'Images/PvcCarParking/',
+          files: ['pvc1.jpeg', 'pvc2.jpeg', 'pvc3.jpeg', 'pvc4.jpeg', 'pvc5.jpeg', 'pvc6.jpeg', 'pvc7.jpeg', 'pvc8.jpeg', 'pvc9.jpeg', 'pvc10.jpeg', 'pvc11.jpeg', 'pvc12.jpeg', 'pvc13.jpeg', 'pvc14.jpeg', 'pvc15.jpeg', 'pvc16.jpeg', 'pvc17.jpeg', 'pvc18.jpeg', 'pvc19.jpeg', 'pvc20.jpeg']
+        },
+        'modern-car-parking': {
+          folder: 'ModernCarparking/',
+          files: ['MP1.jpeg', 'MP2.jpeg', 'MP3.jpeg', 'MP4.jpeg','MP4.jpeg','MP5.jpeg','MP6.jpeg','MP7.jpeg','MP8.jpeg','MP9.jpeg','MP10.jpeg','MP11.jpeg','MP12.jpeg','MP13.jpeg','MP14.jpeg','MP15.jpeg','MP16.jpeg','MP17.jpeg','MP18.jpeg','MP19.jpeg','MP20.jpeg','MP21.jpeg','MP22.jpeg','MP23.jpeg','MP24.jpeg','MP25.jpeg','MP26.jpeg','MP27.jpeg']
+        },
+        'aluminium-doors': {
+          folder: 'images/aluminium-doors/',
+          files: ['AD1.jpg', 'AD2.jpg']
+        }
+      };
 
   serviceItems.forEach(item => {
     item.addEventListener('click', () => {
@@ -155,3 +155,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   pages.style.cursor = 'grab';
 });
+
