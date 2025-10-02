@@ -341,7 +341,7 @@ h1 {
 
 @media (max-width: 480px) {
   .container {
-    height: 500px;
+    height: 800px;
   }
 
   .page {
@@ -364,4 +364,5 @@ h1 {
     height: 120px;
   }
 }
+
 
