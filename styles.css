@@ -19,7 +19,7 @@ body {
   position: relative;
   width: 100%;
   max-width: 400px;
-  height: 600px;
+  height: 800px;
   overflow: hidden;
   border-radius: 20px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
@@ -364,3 +364,4 @@ h1 {
     height: 120px;
   }
 }
+
