@@ -1,0 +1,366 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #4a5568;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  background-color: #4a5568;
+  border: 3px solid #3182ce;
+}
+
+.pages {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.page {
+  width: 33.333%;
+  height: 100%;
+  background-color: #4a5568;
+  padding: 30px;
+  text-align: center;
+  overflow-y: auto;
+}
+
+/* Page 1 – Contact Card */
+.logo-container {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border: 4px solid #3182ce;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.job-title {
+  font-size: 18px;
+  color: #a0aec0;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+.contact-info {
+  margin: 25px 0;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+.contact-item:hover {
+  background-color: #f5f5f5;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  color: #6e8efb;
+  overflow: hidden;
+}
+
+.icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.contact-details {
+  text-align: left;
+  flex: 1;
+}
+
+.contact-type {
+  font-size: 12px;
+  color: #a0aec0;
+  margin-bottom: 3px;
+}
+
+.contact-value {
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.website {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.website:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nfc-indicator {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #a0aec0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nfc-icon {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.whatsapp-link {
+  color: #3182ce;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Page 2 - Services */
+.services-list {
+  list-style-type: none;
+  margin-top: 20px;
+}
+
+.service-item {
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.service-item:hover {
+  background-color: #e9e9e9;
+  transform: translateX(5px);
+}
+
+.service-item.active {
+  background-color: #e0e8ff;
+  border-left: 4px solid #6e8efb;
+}
+
+.service-item:before {
+  content: "✓";
+  color: #6e8efb;
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+/* Page 3 - Gallery */
+.service-gallery {
+  margin-top: 20px;
+  display: none;
+}
+
+.service-gallery.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+.gallery-title {
+  font-size: 22px;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.gallery-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.gallery-image {
+  width: 100%;
+  height: 140px;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  border: 2px solid #f0f0f0;
+}
+
+.gallery-image:hover {
+  transform: scale(1.05);
+  border-color: #6e8efb;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #6e8efb;
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background: #5a7dfa;
+  transform: translateY(-2px);
+}
+
+/* Navigation dots */
+.navigation {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: #6e8efb;
+}
+
+/* Image Modal */
+.image-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image-modal .modal-content {
+  max-width: 90%;
+  max-height: 70%;
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.image-caption {
+  color: white;
+  margin-top: 15px;
+  font-size: 16px;
+  text-align: center;
+  max-width: 80%;
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    height: 500px;
+  }
+
+  .page {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .job-title {
+    font-size: 16px;
+  }
+
+  .gallery-images {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-image {
+    height: 120px;
+  }
+}
